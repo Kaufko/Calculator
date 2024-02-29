@@ -31,7 +31,7 @@ namespace Functions
     {
         public static void WriteToHistory(string operation, float result)
         {
-            File.AppendAllText($"{Path.GetTempPath()}history.log", $"{operation} {result}");
+            File.AppendAllText($"{Path.GetTempPath()}history.log", $"{operation} {result}\n");
         }
     }
 }
