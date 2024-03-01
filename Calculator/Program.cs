@@ -7,7 +7,7 @@ namespace Calculator
     {
         public static void Main(string[] args)
         {
-            Miscellaneous.WriteToHistory("test", 1);
+            Console.WriteLine(Operators.Sqrt(81));
         }
     }
 }

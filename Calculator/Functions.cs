@@ -18,13 +18,32 @@ namespace Functions
             return result;
         }
 
-        public static float Sqrt(float number, int sqrtNum)
+        public static int Sqrt(int n)
         {
-            float result = number;
-            result *= 1.0f / sqrtNum;
-            return result;
+            if (n < 2)
+            {
+                return n;
+            }
+            int low = 1, high = n;
+            while (low <= high)
+            {
+                int mid = (low + high) / 2;
+                if (mid * mid == n)
+                {
+                    return mid;
+                }
+                else if (mid * mid < n)
+                {
+                    low = mid + 1;
+                }
+                else
+                {
+                    high = mid - 1;
+                }
+            }
+            return high;
         }
-        
+
         public static int Factorial(int number)
         {
             int result = 0;
