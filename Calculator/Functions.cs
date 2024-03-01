@@ -25,6 +25,16 @@ namespace Functions
             return result;
         }
         
+        public static int Factorial(int number)
+        {
+            int result = 0;
+            for (int i = 0;i < number;i++)
+            {
+                result *= number;
+            }
+            return result;
+        }
+        
     }
 
     public static class Miscellaneous
