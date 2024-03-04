@@ -10,23 +10,26 @@
             string expression = "";
             foreach (int num in nums)
             {
-                expression += $"+{num}";
+                expression += $"{num}+";
                 result += num;
             }
+            expression = expression.Remove(expression.Length - 1);
             Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
             Console.ReadKey();
             Miscellaneous.WriteToHistory(expression, result);
         }
         public static void SubWhole()
         {
-            Console.WriteLine("Zadej čísla ve formátu(1,2,3,4...)");
-            int[] nums = Array.ConvertAll(Console.ReadLine().Split(","), int.Parse);
-            int result = 0;
-            string expression = "";
-            foreach (int num in nums)
+            Console.WriteLine("Zadej číslo");
+            int num = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Zadej čísla které se budou odčítat od prvního čísla ve formátu(1,2,3,4...)");
+            int[] subdividers = Array.ConvertAll(Console.ReadLine().Split(","), int.Parse);
+            int result = num;
+            string expression = Convert.ToString(num);
+            foreach (int subdivider in subdividers)
             {
-                expression += $"-{num}";
-                result -= num;
+                expression += $"-{subdivider}";
+                result -= subdivider;
             }
             Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
             Console.ReadKey();
@@ -40,9 +43,10 @@
             string expression = "";
             foreach (int num in nums)
             {
-                expression += $"*{num}";
+                expression += $"{num}*";
                 result *= num;
             }
+            expression = expression.Remove(expression.Length - 1);
             Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
             Console.ReadKey();
             Miscellaneous.WriteToHistory(expression, result);
@@ -109,25 +113,27 @@
             string expression = "";
             foreach (double num in nums)
             {
-                expression += $"+{num}";
+                expression += $"{num}+";
                 result += num;
             }
+            expression = expression.Remove(expression.Length - 1);
             Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
             Console.ReadKey();
             Miscellaneous.WriteToHistory(expression, result);
         }
         public static void SubDec()
         {
-            Console.WriteLine("Zadej čísla ve formátu(1.1,2.2,3.3,4.5 ...)");
-            double[] nums = Array.ConvertAll(Console.ReadLine().Split(","), double.Parse);
-            double result = 0;
-            string expression = "";
-            foreach (double num in nums)
+            Console.WriteLine("Zadej číslo");
+            double num = Convert.ToDouble(Console.ReadLine()); 
+            Console.WriteLine("Zadej čísla které se budou odčítat od prvního čísla ve formátu(1.1,2.2,3.3,4.5 ...)");
+            double[] subdividers = Array.ConvertAll(Console.ReadLine().Split(","), double.Parse);
+            double result = num;
+            string expression = Convert.ToString(num);
+            foreach (double subdivider in subdividers)
             {
-                expression += $"-{num}";
-                result -= num;
+                expression += $"-{subdivider}";
+                result -= subdivider;
             }
-            expression.Remove(expression.Length - 1);
             Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
             Console.ReadKey();
             Miscellaneous.WriteToHistory(expression, result);
@@ -143,7 +149,7 @@
                 expression += $"*{num}";
                 result *= num;
             }
-            expression.Remove(expression.Length - 1);
+            expression = expression.Remove(expression.Length - 1);
             Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
             Console.ReadKey();
             Miscellaneous.WriteToHistory(expression, result);
@@ -220,6 +226,15 @@
 
     public static class Miscellaneous
     {
+        public static void WriteHistory()
+        {
+            string[] lines = File.ReadAllLines($"{Path.GetTempPath()}history.log");
+            for(int i = lines.Count(); i > 0; i--)
+            {
+                Console.WriteLine(lines[i-1]);
+            }
+            Console.ReadKey();
+        }
         public static void WriteToHistory(string operation, double result)
         {
             File.AppendAllText(
@@ -236,19 +251,28 @@
                 NCalc.Expression expression = new NCalc.Expression(input);
                 var result = expression.Evaluate();
 
-                Console.WriteLine(result);
-                WriteToHistory(input, (float)result); 
+                
+
+                Console.WriteLine(Convert.ToString(result));
+                WriteToHistory(input, Convert.ToDouble(result));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Console.WriteLine("Napsal si vzorec špatně");
+                
+                Console.WriteLine(e);
             }
+            
             Console.ReadKey();
             
         }
         public static void CwControls()
         {
-            Console.WriteLine("PRIDEJ TO SEM POTOM"); //jestli sem na toto zapomnel...
+            Console.Clear();
+            Console.WriteLine("Zmáčkni klávesu Enter pro spuštění vybrané položky");
+            Console.WriteLine("Zmáčkni šipku dolů a nahorů pro vybýrání položek");
+            Console.WriteLine("Zmáčkni Backspace pro návrat do hlavního menu");
+            Console.WriteLine("Zmáčkni Escape pro ukončení aplikace");
+            Console.WriteLine("\nZmáčkni jakoukoli klávesu pro pokračování");
             Console.ReadKey();
         }
 
@@ -257,8 +281,8 @@
             //replaces Ans with value of last answer result
             return input.Replace(
                 "Ans",
-                File.ReadLines(Path.GetTempPath())
-                .First().Split()[1]
+                File.ReadLines($"{Path.GetTempPath()}history.log")
+                .Last().Split()[1]
                 ); 
         }
     }

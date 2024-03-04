@@ -22,7 +22,8 @@ namespace Calculator
             {
                 new Menu("Celá čísla", () => MenuK.SelectSubMenu(wholeNumMenu)),
                 new Menu("Desetiná čísla", () => MenuK.SelectSubMenu(decNumMenu)),
-                new Menu("Vlastní vzorec", () => Miscellaneous.Eval())
+                new Menu("Vlastní vzorec", () => Miscellaneous.Eval()),
+                new Menu("Historie", () => Miscellaneous.WriteHistory())
             };
 
             wholeNumMenu = new List<Menu>
