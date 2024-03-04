@@ -27,15 +27,26 @@ namespace Calculator
 
             wholeNumMenu = new List<Menu>
             {
-                new Menu("", () => ),
-                new Menu("", () => ),
-                new Menu("", () => ),
-                new Menu("", () => ),
-                new Menu("", () => ),
-                new Menu("", () => ),
-                new Menu("", () => ),
-                new Menu("", () => ),
+                new Menu("Sčítaní", () => Operators.SumWhole()),
+                new Menu("Odčítaní", () => Operators.SubWhole()),
+                new Menu("Násobení", () => Operators.MulWhole()),
+                new Menu("Dělení", () => Operators.DivWhole()),
+                new Menu("Faktoriál", () => Operators.Factorial()),
+                new Menu("Mocnění", () => Operators.PowWhole()),
+                new Menu("Zbytek", () => Operators.Modulo()),
+                new Menu("Odmocnění", () => Operators.Root()),
             };
+
+            decNumMenu = new List<Menu>
+            {
+                new Menu("Sčítaní", () => Operators.SumDec()),
+                new Menu("Odčítaní", () => Operators.SubDec()),
+                new Menu("Násobení", () => Operators.MulDec()),
+                new Menu("Dělení", () => Operators.DivDec()),
+                new Menu("Mocnění", () => Operators.PowDec()),
+                new Menu("Odmocnění", () => Operators.Root()),
+            };
+
 
             MenuK.Start(mainMenu); //run last
         }

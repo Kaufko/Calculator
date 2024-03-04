@@ -1,111 +1,208 @@
-﻿using NCalc;
-
-namespace Functions
+﻿namespace Functions
 {
     public static class Operators
     {
-        public static int SumWhole(int[] nums)
+        public static void SumWhole()
         {
+            Console.WriteLine("Zadej čísla ve formátu(1,2,3,4...)");
+            int[] nums = Array.ConvertAll(Console.ReadLine().Split(","), int.Parse);
             int result = 0;
-            foreach(int num in nums)
-            {
-                result += num;
-            }
-            return result;
-        }
-        public static int SubWhole(int[] nums)
-        {
-            int result = 0;
+            string expression = "";
             foreach (int num in nums)
             {
-                result -= num;
-            }
-            return result;
-        }
-        public static int MulWhole(int[] nums)
-        {
-            int result = 0;
-            foreach(int num in nums)
-            {
-                result *= num;
-            }
-            return result;
-        }
-        public static int Factorial(int number)
-        {
-            int result = 0;
-            for (int i = 0; i < number; i++)
-            {
-                result *= number;
-            }
-            return result;
-        }
-        public static int PowWhole(int number, int powerOf)
-        {
-            int result = number;
-            for (int i = 0; i < powerOf - 1; i++)
-            {
-                result *= number;
-            }
-            return result;
-        }
-        public static double SumDec(double[] nums)
-        {
-            double result = 0;
-            foreach (double num in nums)
-            {
+                expression += $"+{num}";
                 result += num;
             }
-            return result;
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, result);
         }
-        public static double SubDec(double[] nums)
+        public static void SubWhole()
         {
-            double result = 0;
-            foreach (double num in nums)
+            Console.WriteLine("Zadej čísla ve formátu(1,2,3,4...)");
+            int[] nums = Array.ConvertAll(Console.ReadLine().Split(","), int.Parse);
+            int result = 0;
+            string expression = "";
+            foreach (int num in nums)
             {
+                expression += $"-{num}";
                 result -= num;
             }
-            return result;
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, result);
         }
-        public static double MulDec(double[] nums)
+        public static void MulWhole()
         {
-            double result = 0;
-            foreach (double num in nums)
+            Console.WriteLine("Zadej čísla ve formátu(1,2,3,4...)");
+            int[] nums = Array.ConvertAll(Console.ReadLine().Split(","), int.Parse);
+            int result = 1;
+            string expression = "";
+            foreach (int num in nums)
             {
+                expression += $"*{num}";
                 result *= num;
             }
-            return result;
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, result);
         }
-        public static double PowDec(double number, int powerOf)
+        public static void DivWhole()
         {
-            double result = number;
-            for (int i = 0; i < powerOf-1; i++)
+            Console.WriteLine("Zadej číslo");
+            int num = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Zadej dělitele ve formátu(1,2,3,4...)");
+            int[] divideres = Array.ConvertAll(Console.ReadLine().Split(","), int.Parse);
+            string expression = Convert.ToString(num);
+            foreach (int divider in divideres)
+            {
+                expression += $"/{divider}";
+                num /= divider;
+            }
+            Console.WriteLine(num + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, num);
+        }
+        public static void PowWhole()
+        {
+            Console.WriteLine("Zadej číslo");
+            int number = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Zadej mocninu");
+            int powerOf = Convert.ToInt32(Console.ReadLine());
+            int result = 1;
+            for (int i = 0; i < powerOf; i++)
             {
                 result *= number;
             }
-            return result;
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory($"{number}^{powerOf}", result);
         }
-        public static double Abs(double number)
+        public static void Modulo()
         {
-            return number = number < 0 ? -number : number;
-            
+            Console.WriteLine("Zadej číslo");
+            int number = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Zadej dělitele");
+            int divider = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine((number % divider) + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory($"{number}%{divider}", number % divider);
         }
-        public static double Root(double num, int sqrtNum)
+        public static void Factorial()
         {
-            int precision = PowWhole(10, num.ToString().Length);
+            Console.WriteLine("Zadej číslo");
+            int number = Convert.ToInt32(Console.ReadLine());
+            int result = 1;
+            for (int i = number; i > 0; i--)
+            {
+                result *= i;
+            }
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory($"!{number}", result);
+        }
+        public static void SumDec()
+        {
+            Console.WriteLine("Zadej čísla ve formátu(1.1,2.2,3.3,4.5 ...)");
+            double[] nums = Array.ConvertAll(Console.ReadLine().Split(","), double.Parse);
+            double result = 0;
+            string expression = "";
+            foreach (double num in nums)
+            {
+                expression += $"+{num}";
+                result += num;
+            }
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, result);
+        }
+        public static void SubDec()
+        {
+            Console.WriteLine("Zadej čísla ve formátu(1.1,2.2,3.3,4.5 ...)");
+            double[] nums = Array.ConvertAll(Console.ReadLine().Split(","), double.Parse);
+            double result = 0;
+            string expression = "";
+            foreach (double num in nums)
+            {
+                expression += $"-{num}";
+                result -= num;
+            }
+            expression.Remove(expression.Length - 1);
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, result);
+        }
+        public static void MulDec()
+        {
+            Console.WriteLine("Zadej čísla ve formátu(1.1,2.2,3.3,4.5 ...)");
+            double[] nums = Array.ConvertAll(Console.ReadLine().Split(","), double.Parse);
+            double result = 1;
+            string expression = "";
+            foreach (double num in nums)
+            {
+                expression += $"*{num}";
+                result *= num;
+            }
+            expression.Remove(expression.Length - 1);
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, result);
+        }
+        public static void DivDec()
+        {
+            Console.WriteLine("Zadej čísla ve formátu(1.1,2.2,3.3,4.5 ...)");
+            double[] dividers = Array.ConvertAll(Console.ReadLine().Split(","), double.Parse);
+            double number = Convert.ToDouble(Console.ReadLine());
+            string expression = Convert.ToString(number);
+            foreach (double divider in dividers)
+            {
+                expression += $"/{divider}";
+                number /= divider;
+            }
+            Console.WriteLine(number + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory(expression, number);
+        }
+        public static void PowDec()
+        {
+            Console.WriteLine("Zadej číslo");
+            double number = Convert.ToDouble(Miscellaneous.replaceAns(Console.ReadLine()));
+            Console.WriteLine("Zadej mocninu");
+            Int16 powerOf = Convert.ToInt16(Console.ReadLine());
+            double result = 1;
+            for (int i = 0; i < powerOf; i++)
+            {
+                result *= number;
+            }
+            Console.WriteLine(result + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory($"{number}^{powerOf}", result);
+        }
+        public static void Root()
+        {
+            Console.WriteLine("Zadej číslo na odmocnění");
+            double num = Convert.ToDouble(Miscellaneous.replaceAns(Console.ReadLine()));
+            Console.WriteLine("Zadej mocnitele");
+            Int16 sqrtNum = Convert.ToInt16(Miscellaneous.replaceAns(Console.ReadLine()));
             if (num < 2)
             {
-                return num;
+                Console.WriteLine(num + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+                Console.ReadKey();
+                Miscellaneous.WriteToHistory($"{sqrtNum}\u221a{num}", num);
+                return;
             }
-            double low = 1d/precision, high = num;
+            double low = 1, high = num;
             while (low <= high)
             {
                 double mid = (low + high) / 2.0d;
-                if (Abs(PowDec(mid, sqrtNum) - num) <= 0.0000000000000001d)
+                if (Math.Abs(Math.Pow(mid, sqrtNum) - num) <= 0.0000000000000001d)
                 {
-                    return mid;
+                    Console.WriteLine(mid + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+                    Console.ReadKey();
+                    Miscellaneous.WriteToHistory($"{sqrtNum}\u221a{num}", mid);
+                    return;
                 }
-                else if (PowDec(mid, sqrtNum) < num)
+                else if (Math.Pow(mid, sqrtNum) < num)
                 {
                     low = mid + 0.000000000000001d;
                 }
@@ -114,43 +211,55 @@ namespace Functions
                     high = mid - 0.000000000000001d;
                 }
             }
-            return high;
+            Console.WriteLine(high + "\nZmáčkněte jakékoli tlačítko pro pokračování");
+            Console.ReadKey();
+            Miscellaneous.WriteToHistory($"{sqrtNum}\u221a{num}", (float)high);
+            return;
         }
     }
 
     public static class Miscellaneous
     {
-        public static void WriteToHistory(string operation, float result)
+        public static void WriteToHistory(string operation, double result)
         {
-            File.AppendAllText($"{Path.GetTempPath()}history.log", $"{operation} {result}\n");
-        }
-        private static void Evaluate(string input)
-        {
-            NCalc.Expression expression = new NCalc.Expression(input);
-            var result = expression.Evaluate();
-
-            Console.WriteLine(result);
-
+            File.AppendAllText(
+                $"{Path.GetTempPath()}history.log", //gets history.log in /temp
+                $"{operation} {result}\n"
+                );
         }
         public static void Eval()
         {
-            Console.WriteLine("Napiš matematický vzorec");
-            string input = Console.ReadLine();
+            Console.WriteLine("Napiš matematický vzorec, pro poslední výsledek použijte Ans (1+Ans)");
+            string input = replaceAns(Console.ReadLine());
             try
             {
-                Evaluate(input);
+                NCalc.Expression expression = new NCalc.Expression(input);
+                var result = expression.Evaluate();
+
+                Console.WriteLine(result);
+                WriteToHistory(input, (float)result); 
             }
             catch (Exception)
             {
-
                 Console.WriteLine("Napsal si vzorec špatně");
             }
             Console.ReadKey();
+            
         }
         public static void CwControls()
         {
-            Console.WriteLine("yay");
+            Console.WriteLine("PRIDEJ TO SEM POTOM"); //jestli sem na toto zapomnel...
             Console.ReadKey();
+        }
+
+        internal static string replaceAns(string input)
+        {
+            //replaces Ans with value of last answer result
+            return input.Replace(
+                "Ans",
+                File.ReadLines(Path.GetTempPath())
+                .First().Split()[1]
+                ); 
         }
     }
 }

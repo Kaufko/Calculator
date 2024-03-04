@@ -2,7 +2,7 @@
 {
     public static class MenuK
     {
-        static List<Menu> activeMenu = new List<Menu>();
+        static List<Menu> activeMenu = [];
         static public int selectionIndex = 0;
         public static void Start(List<Menu> mainMenu)
         {
