@@ -1,10 +1,10 @@
 ﻿namespace MenuLib
 {
-    public class MenuK
+    public static class MenuK
     {
-        List<Menu> activeMenu = new List<Menu>();
-        int selectionIndex = 0;
-        void Start(List<Menu> mainMenu)
+        static List<Menu> activeMenu = new List<Menu>();
+        static public int selectionIndex = 0;
+        public static void Start(List<Menu> mainMenu)
         {
             activeMenu = mainMenu;
             ConsoleKeyInfo keyRead;
@@ -35,7 +35,7 @@
             while (keyRead.Key != ConsoleKey.Escape);
         }
 
-        void Write(List<Menu> activeMenu, int selectionIndex)
+        public static void Write(List<Menu> activeMenu, int selectionIndex)
         {
             Console.Clear();
 
@@ -53,7 +53,7 @@
 
         }
 
-        void SelectSubMenu(List<Menu> menu)
+        public static void SelectSubMenu(List<Menu> menu)
         {
             selectionIndex = 0;
             activeMenu = menu;
@@ -63,13 +63,11 @@
     public class Menu
     {
         public string Name { get; }
-        public bool WaitForKey { get; }
         public Action Action { get; }
 
-        public Menu(string name, bool waitForKey, Action action)
+        public Menu(string name, Action action)
         {
             Name = name;
-            WaitForKey = waitForKey;
             Action = action;
         }
     }
