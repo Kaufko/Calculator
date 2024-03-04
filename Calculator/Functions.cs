@@ -1,44 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Functions
+﻿namespace Functions
 {
     public static class Operators
     {
-        public static float Pow(float number, int powerOf)
+        public static double Pow(double number, int powerOf)
         {
-            float result = number;
-            for (int i = 0; i < powerOf; i++)
+            double result = number;
+            for (int i = 0; i < powerOf-1; i++)
             {
                 result *= number;
             }
             return result;
         }
-
-        public static int Sqrt(int n)
+        public static double Abs(double number)
         {
-            if (n < 2)
+            return number = number < 0 ? -number : number;
+            
+        }
+        public static double Root(double num, int sqrtNum)
+        {
+            int precision = (int)Pow(10, num.ToString().Length);
+            if (num < 2)
             {
-                return n;
+                return num;
             }
-            int low = 1, high = n;
+            double low = 1d/precision, high = num;
             while (low <= high)
             {
-                int mid = (low + high) / 2;
-                if (mid * mid == n)
+                double mid = (low + high) / 2.0d;
+                if (Abs(Pow(mid, sqrtNum) - num) <= 0.0000000000000001d)
                 {
                     return mid;
                 }
-                else if (mid * mid < n)
+                else if (Pow(mid, sqrtNum) < num)
                 {
-                    low = mid + 1;
+                    low = mid + 0.000000000000001d;
                 }
                 else
                 {
-                    high = mid - 1;
+                    high = mid - 0.000000000000001d;
                 }
             }
             return high;
